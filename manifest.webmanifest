@@ -1,0 +1,10 @@
+{
+  "name": "MyFit — Лисёнок",
+  "short_name": "MyFit",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f2ef",
+  "theme_color": "#17161b",
+  "lang": "ru-RU",
+  "description": "Личный трекер тренировок, ходьбы и прогресса"
+}
