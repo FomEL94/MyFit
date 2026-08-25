@@ -1,12 +1,12 @@
 {
-  "id": "./myfit-v5",
+  "id": "./myfit",
   "name": "MyFit — Лисёнок",
   "short_name": "MyFit",
-  "start_url": "./app-v2.html?v=5",
+  "start_url": "./app-v2.html?v=8",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f5f2ef",
   "theme_color": "#17161b",
   "lang": "ru-RU",
-  "description": "Личный трекер тренировок, ходьбы и прогресса"
+  "description": "Личный трекер тренировок, ходьбы, состояния и прогресса"
 }
