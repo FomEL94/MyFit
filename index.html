@@ -1,116 +1,18 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#17161b" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="MyFit" />
-  <link rel="manifest" href="manifest.webmanifest" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17161b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="MyFit">
+  <link rel="manifest" href="./manifest.webmanifest?v=5">
   <title>MyFit</title>
-  <style>
-    :root{--bg:#f5f2ef;--card:#fff;--ink:#211f24;--muted:#7b747d;--accent:#d95f78;--accent2:#f3d2d9;--green:#4c8a68;--line:#eee7e9;--shadow:0 10px 35px rgba(60,38,44,.08)}
-    *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-    button,input{font:inherit}.app{max-width:520px;margin:auto;min-height:100vh;padding:calc(18px + env(safe-area-inset-top)) 18px calc(100px + env(safe-area-inset-bottom))}
-    .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.eyebrow{color:var(--muted);font-size:14px}.top h1{margin:4px 0 0;font-size:32px;letter-spacing:-.8px}.avatar{width:48px;height:48px;border-radius:16px;background:#1f1c22;color:#fff;display:grid;place-items:center;font-size:24px}
-    .hero{background:linear-gradient(145deg,#2a252b,#17161b);color:#fff;border-radius:28px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;position:relative}.hero:after{content:"🍑";position:absolute;right:16px;top:7px;font-size:76px;opacity:.13;transform:rotate(12deg)}
-    .hero small{opacity:.7}.hero h2{font-size:26px;margin:8px 0 8px;max-width:75%}.hero p{opacity:.76;margin:0;line-height:1.45}.progressRow{display:flex;align-items:center;gap:12px;margin-top:20px}.bar{height:9px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;flex:1}.bar>i{display:block;height:100%;width:0;background:#fff;border-radius:99px;transition:.3s}.progressText{font-weight:700;min-width:42px;text-align:right}
-    .sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 12px}.sectionTitle h3{margin:0;font-size:20px}.sectionTitle span{font-size:13px;color:var(--muted)}
-    .tasks{display:grid;gap:10px}.task{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;align-items:center;gap:13px;box-shadow:0 4px 16px rgba(60,38,44,.03)}.task.done{opacity:.62}.taskIcon{width:44px;height:44px;border-radius:14px;background:#f7eef0;display:grid;place-items:center;font-size:21px;flex:none}.taskMain{flex:1}.taskMain b{display:block;font-size:16px}.taskMain small{display:block;color:var(--muted);margin-top:3px;line-height:1.25}.check{width:34px;height:34px;border-radius:12px;border:1.5px solid #ddcfd3;background:#fff;color:#fff;font-weight:900}.done .check{background:var(--green);border-color:var(--green)}
-    .quote{background:#f0e2d8;border-radius:22px;padding:18px;margin-top:14px;line-height:1.45}.quote b{display:block;margin-bottom:4px}.quote span{color:#675c61}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#fff;border-radius:18px;padding:15px 10px;text-align:center;border:1px solid var(--line)}.stat strong{font-size:23px;display:block}.stat small{font-size:11px;color:var(--muted)}
-    .week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{background:#fff;border-radius:14px;padding:9px 2px;text-align:center;border:1px solid var(--line);font-size:11px}.day b{display:block;margin-top:5px;font-size:15px}.day.today{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.day.ok{background:#edf6f0}
-    .nav{position:fixed;bottom:0;left:0;right:0;padding:10px 18px calc(10px + env(safe-area-inset-bottom));background:rgba(245,242,239,.92);backdrop-filter:blur(18px);display:flex;justify-content:center}.navInner{width:min(484px,100%);background:#201d22;border-radius:22px;padding:7px;display:grid;grid-template-columns:repeat(3,1fr)}.nav button{border:0;background:none;color:#978f99;padding:11px 4px;border-radius:16px}.nav button.active{background:#fff;color:#201d22;font-weight:700}
-    .view{display:none}.view.active{display:block}.measureCard{background:#fff;border-radius:24px;padding:18px;border:1px solid var(--line)}.measureGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{font-size:12px;color:var(--muted);display:block;margin:0 0 5px}.field input{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:#faf8f7}.primary{width:100%;border:0;border-radius:15px;background:#201d22;color:#fff;padding:14px;font-weight:700;margin-top:12px}.history{margin-top:12px;display:grid;gap:8px}.historyItem{font-size:13px;padding:12px;border-radius:14px;background:#faf8f7;color:#5e565d}
-    dialog{border:0;border-radius:26px;padding:0;width:min(480px,calc(100% - 24px));max-height:82vh;box-shadow:0 24px 80px rgba(0,0,0,.25)}dialog::backdrop{background:rgba(22,18,22,.45);backdrop-filter:blur(5px)}.modal{padding:22px}.modalHead{display:flex;justify-content:space-between;gap:16px}.modal h3{margin:0;font-size:24px}.close{border:0;background:#f2edef;border-radius:12px;width:36px;height:36px}.exercise{border-top:1px solid var(--line);padding:14px 0}.exercise:first-of-type{margin-top:12px}.exerciseTop{display:flex;justify-content:space-between;gap:10px}.exercise p{margin:5px 0 10px;color:var(--muted);font-size:13px}.sets{display:flex;gap:7px;flex-wrap:wrap}.setBtn{border:1px solid #ddd2d5;background:#fff;border-radius:12px;padding:8px 10px}.setBtn.done{background:#201d22;color:#fff;border-color:#201d22}.finish{background:var(--accent);color:#fff}
-    .toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,15px);width:min(440px,calc(100% - 36px));background:#201d22;color:#fff;padding:14px 16px;border-radius:18px;opacity:0;pointer-events:none;transition:.25s;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.2)}.toast.show{opacity:1;transform:translate(-50%,0)}
-  </style>
+  <meta http-equiv="refresh" content="0; url=./app-v2.html?v=5">
 </head>
 <body>
-<div class="app">
-  <section id="home" class="view active">
-    <div class="top"><div><div class="eyebrow" id="dateLabel"></div><h1>Привет, Лисёнок</h1></div><div class="avatar">🦊</div></div>
-    <div class="hero"><small>Твой план на сегодня</small><h2 id="todayTitle">Загружаю…</h2><p id="todaySub"></p><div class="progressRow"><div class="bar"><i id="progressBar"></i></div><div class="progressText" id="progressText">0%</div></div></div>
-    <div class="sectionTitle"><h3>Сегодня</h3><span id="taskCount"></span></div><div class="tasks" id="taskList"></div>
-    <div class="quote" id="praise"><b>Тёма говорит:</b><span>Главная задача сегодня — просто начать. Без героизма, красавица 😏</span></div>
-    <div class="sectionTitle"><h3>Неделя</h3><span>без чувства вины</span></div><div class="week" id="weekStrip"></div>
-  </section>
-
-  <section id="progress" class="view">
-    <div class="top"><div><div class="eyebrow">Смотрим на факты</div><h1>Мой прогресс</h1></div><div class="avatar">📈</div></div>
-    <div class="stats"><div class="stat"><strong id="sWorkouts">0</strong><small>тренировки</small></div><div class="stat"><strong id="sKm">0</strong><small>км пешком</small></div><div class="stat"><strong id="sStairs">0</strong><small>подъёмы</small></div></div>
-    <div class="sectionTitle"><h3>Замеры</h3><span>раз в 2–4 недели</span></div>
-    <div class="measureCard"><div class="measureGrid"><div class="field"><label>Талия, см</label><input id="waist" inputmode="decimal" placeholder="—"></div><div class="field"><label>Живот, см</label><input id="belly" inputmode="decimal" placeholder="—"></div><div class="field"><label>Бёдра, см</label><input id="hips" inputmode="decimal" placeholder="—"></div><div class="field"><label>Вес, кг (необязательно)</label><input id="weight" inputmode="decimal" placeholder="—"></div></div><button class="primary" onclick="saveMeasure()">Сохранить замеры</button><div id="measureHistory" class="history"></div></div>
-  </section>
-
-  <section id="plan" class="view">
-    <div class="top"><div><div class="eyebrow">Твой базовый ритм</div><h1>План недели</h1></div><div class="avatar">🍑</div></div>
-    <div class="tasks" id="planList"></div>
-    <div class="quote"><b>Правило недели</b><span>Пропустила день — ничего не «отрабатываем». Просто продолжаем со следующего. Мы строим привычку, а не исправительную колонию 😂</span></div>
-  </section>
-</div>
-
-<nav class="nav"><div class="navInner"><button class="active" data-view="home">Сегодня</button><button data-view="progress">Прогресс</button><button data-view="plan">План</button></div></nav>
-<dialog id="workoutDialog"><div class="modal"><div class="modalHead"><div><div class="eyebrow">≈ 20 минут</div><h3>Тренировка 🍑</h3></div><button class="close" onclick="workoutDialog.close()">✕</button></div><div id="exerciseList"></div><button class="primary finish" onclick="finishWorkout()">Тренировка готова</button></div></dialog>
-<div class="toast" id="toast"></div>
 <script>
-const START='2026-08-26';
-const exercises=[
- ['Приседания','3 × 12','Таз назад, колени по направлению носков, стопы прижаты к полу.',3],
- ['Ягодичный мост','3 × 15','Поднимай таз ягодицами, не поясницей. Наверху — короткое сжатие.',3],
- ['Выпады назад','2 × 10 на ногу','Шаг назад, вес в передней ноге, можно слегка наклонить корпус.',2],
- ['Отведение ноги назад','2 × 15 на ногу','Нога уходит назад невысоко. Поясницу не прогибаем.',2],
- ['Dead bug','2 × 8 на сторону','Поясница остаётся у пола. Движения медленные и контролируемые.',2],
- ['Планка','2 × 20 сек','Живот и ягодицы напряжены. Лучше 20 честных секунд, чем минута бананом.',2]
-];
-const schedule={
- 1:[['workout','🍑','Домашняя тренировка','20 минут']],
- 2:[['walk','🚶','Пешком 2 км','на работу или домой'],['stairs','🪜','8 этаж пешком','спокойный подъём вверх']],
- 3:[['workout','🍑','Домашняя тренировка','20 минут']],
- 4:[['walk','🚶','Пешком 2 км','на работу или домой'],['stairs','🪜','8 этаж пешком','спокойный подъём вверх']],
- 5:[['workout','🍑','Домашняя тренировка','20 минут']],
- 6:[['walklong','🚶','Прогулка 30–40 минут','комфортный темп']],
- 0:[['rest','❤️','Отдых','ничего отрабатывать не нужно']]
-};
-const praisePool=[
- 'Вот это моя девочка. Работа принята 😏',
- 'Есть. Именно из таких маленьких галочек потом получается очень симпатичная большая 🍑',
- 'Хорошо идёшь, Лисёнок. Без надрыва — зато стабильно.',
- 'Галочка поставлена. Тёма доволен. Мышцы слегка насторожились 😌',
- 'Ты не обязана быть идеальной. Но сегодня ты сделала то, что обещала себе — и это сильно.'
-];
-let state=JSON.parse(localStorage.getItem('myfit-state')||'{"done":{},"workoutSets":{},"measures":[]}');
-const iso=d=>{let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)};
-const today=new Date(); const todayKey=iso(today);
-function save(){localStorage.setItem('myfit-state',JSON.stringify(state));render();}
-function tasksFor(d){return schedule[d.getDay()]||[]}
-function doneKey(date,type){return date+'|'+type}
-function render(){
- document.getElementById('dateLabel').textContent=today.toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'});
- const tasks=tasksFor(today), completed=tasks.filter(t=>state.done[doneKey(todayKey,t[0])]).length, pct=tasks.length?Math.round(completed/tasks.length*100):0;
- document.getElementById('progressBar').style.width=pct+'%'; document.getElementById('progressText').textContent=pct+'%'; document.getElementById('taskCount').textContent=completed+' из '+tasks.length;
- document.getElementById('todayTitle').textContent=tasks.length===1?tasks[0][2]:(pct===100?'План выполнен ✨':'Немного движения — и свободна');
- document.getElementById('todaySub').textContent=pct===100?'На сегодня всё. Никаких бонусных наказаний.':(today.getDay()===0?'Отдых — тоже часть плана.':'Сделай своё и живи дальше. Фитнес не должен съедать вечер.');
- const list=document.getElementById('taskList'); list.innerHTML='';
- tasks.forEach(t=>{const isDone=!!state.done[doneKey(todayKey,t[0])];const el=document.createElement('div');el.className='task '+(isDone?'done':'');el.innerHTML=`<div class="taskIcon">${t[1]}</div><div class="taskMain"><b>${t[2]}</b><small>${t[3]}</small></div><button class="check">${isDone?'✓':''}</button>`;el.querySelector('.check').onclick=()=>toggleTask(t[0]); if(t[0]==='workout')el.querySelector('.taskMain').onclick=openWorkout;list.appendChild(el)});
- renderWeek(); renderStats(); renderMeasures(); renderPlan();
- if(pct===100)document.querySelector('#praise span').textContent='Всё сделано. Вот теперь можешь совершенно официально собой гордиться 😏';
-}
-function toggleTask(type){if(type==='rest'){state.done[doneKey(todayKey,type)]=!state.done[doneKey(todayKey,type)];save();return} if(type==='workout'&&!state.done[doneKey(todayKey,type)]){openWorkout();return} const k=doneKey(todayKey,type);state.done[k]=!state.done[k]; if(state.done[k])showPraise();save()}
-function openWorkout(){renderExercises();workoutDialog.showModal()}
-function renderExercises(){const root=document.getElementById('exerciseList');root.innerHTML='';exercises.forEach((e,ei)=>{const box=document.createElement('div');box.className='exercise';let buttons='';for(let i=0;i<e[3];i++){const k=todayKey+'|'+ei+'|'+i,done=state.workoutSets[k];buttons+=`<button class="setBtn ${done?'done':''}" onclick="toggleSet(${ei},${i})">Подход ${i+1}${done?' ✓':''}</button>`}box.innerHTML=`<div class="exerciseTop"><b>${e[0]}</b><strong>${e[1]}</strong></div><p>${e[2]}</p><div class="sets">${buttons}</div>`;root.appendChild(box)})}
-function toggleSet(ei,i){const k=todayKey+'|'+ei+'|'+i;state.workoutSets[k]=!state.workoutSets[k];localStorage.setItem('myfit-state',JSON.stringify(state));renderExercises()}
-function finishWorkout(){state.done[doneKey(todayKey,'workout')]=true;workoutDialog.close();showPraise('Тренировка закрыта. Попа получила служебную записку о грядущих переменах 🍑😏');save()}
-function showPraise(text){const t=document.getElementById('toast');t.textContent=text||praisePool[Math.floor(Math.random()*praisePool.length)];t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
-function mondayOf(d){const x=new Date(d);const day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);x.setHours(12,0,0,0);return x}
-function renderWeek(){const root=document.getElementById('weekStrip');root.innerHTML='';const m=mondayOf(today);['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach((n,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);const key=iso(d),ts=tasksFor(d),done=ts.length&&ts.every(t=>state.done[doneKey(key,t[0])]);const el=document.createElement('div');el.className='day '+(key===todayKey?'today ':'')+(done?'ok':'');el.innerHTML=`${n}<b>${d.getDate()}</b>`;root.appendChild(el)})}
-function renderStats(){let workouts=0,km=0,stairs=0;Object.entries(state.done).forEach(([k,v])=>{if(!v)return;if(k.endsWith('|workout'))workouts++;if(k.endsWith('|walk'))km+=2;if(k.endsWith('|walklong'))km+=3;if(k.endsWith('|stairs'))stairs++});sWorkouts.textContent=workouts;sKm.textContent=km;sStairs.textContent=stairs}
-function saveMeasure(){const item={date:todayKey,waist:waist.value,belly:belly.value,hips:hips.value,weight:weight.value};if(!item.waist&&!item.belly&&!item.hips&&!item.weight)return showPraise('Сначала хоть одну цифру, хитрюга 😏');state.measures.unshift(item);state.measures=state.measures.slice(0,12);waist.value=belly.value=hips.value=weight.value='';showPraise('Замеры сохранены. Теперь спорить с зеркалом будем с доказательствами 😌');save()}
-function renderMeasures(){measureHistory.innerHTML=(state.measures||[]).map(m=>`<div class="historyItem"><b>${new Date(m.date+'T12:00').toLocaleDateString('ru-RU')}</b> · талия ${m.waist||'—'} · живот ${m.belly||'—'} · бёдра ${m.hips||'—'} · вес ${m.weight||'—'}</div>`).join('')}
-function renderPlan(){const names=[['Понедельник',1],['Вторник',2],['Среда',3],['Четверг',4],['Пятница',5],['Суббота',6],['Воскресенье',0]];planList.innerHTML=names.map(([name,d])=>{const ts=schedule[d];return `<div class="task"><div class="taskIcon">${ts[0][1]}</div><div class="taskMain"><b>${name}</b><small>${ts.map(x=>x[2]+' · '+x[3]).join(' + ')}</small></div></div>`}).join('')}
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===b.dataset.view));window.scrollTo({top:0,behavior:'smooth'})});
-if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-render();
+  location.replace('./app-v2.html?v=5');
 </script>
-</body></html>
+</body>
+</html>
