@@ -1,5 +1,6 @@
-const CACHE='myfit-v2';
-const ASSETS=['./index.html','./manifest.webmanifest','./storage-fix.js'];
+const CACHE='myfit-v3';
+const APP='./app-v2.html';
+const ASSETS=[APP,'./manifest.webmanifest'];
 
 self.addEventListener('install',e=>{
   self.skipWaiting();
@@ -13,34 +14,20 @@ self.addEventListener('activate',e=>{
   ]));
 });
 
-async function injectStorageFix(response){
-  const text=await response.text();
-  const patched=text.includes('storage-fix.js')?text:text.replace('</body>','<script src="./storage-fix.js?v=2"></script></body>');
-  const headers=new Headers(response.headers);
-  headers.set('content-type','text/html; charset=utf-8');
-  return new Response(patched,{status:response.status,statusText:response.statusText,headers});
-}
-
 self.addEventListener('fetch',e=>{
   const req=e.request;
   if(req.mode==='navigate'){
     e.respondWith((async()=>{
       try{
-        const fresh=await fetch(req,{cache:'no-store'});
+        const fresh=await fetch(APP,{cache:'no-store'});
         if(fresh.ok){
-          const copy=fresh.clone();
-          caches.open(CACHE).then(c=>c.put('./index.html',copy)).catch(()=>{});
-          return injectStorageFix(fresh);
+          caches.open(CACHE).then(c=>c.put(APP,fresh.clone())).catch(()=>{});
+          return fresh;
         }
       }catch(err){}
-      const cached=await caches.match('./index.html');
-      return cached?injectStorageFix(cached):fetch(req);
+      return (await caches.match(APP)) || fetch(APP);
     })());
     return;
   }
-  if(new URL(req.url).pathname.endsWith('/storage-fix.js')){
-    e.respondWith(fetch(req,{cache:'no-store'}).catch(()=>caches.match('./storage-fix.js')));
-    return;
-  }
-  e.respondWith(caches.match(req).then(cached=>cached||fetch(req)));
+  e.respondWith(fetch(req,{cache:'no-store'}).catch(()=>caches.match(req)));
 });
